@@ -19,15 +19,15 @@ type layout struct {
 	indent    int
 }
 
-func (l *layout) widthInPixels(style *style) int {
+func (l *layout) widthInPixels(style *Style) int {
 	return l.sizeInPixels(l.widths, l.itemIndex%len(l.widths), 8, style.defaultWidth+style.padding*2, l.body.Dx()-l.indent, style)
 }
 
-func (l *layout) heightInPixels(style *style) int {
+func (l *layout) heightInPixels(style *Style) int {
 	return l.sizeInPixels(l.heights, l.itemIndex/len(l.widths), 6, style.defaultHeight, l.body.Dy(), style)
 }
 
-func (l *layout) sizeInPixels(sizes []int, index int, minSize, defaultSize int, entireSize int, style *style) int {
+func (l *layout) sizeInPixels(sizes []int, index int, minSize, defaultSize int, entireSize int, style *Style) int {
 	s := sizes[index]
 	if s > 0 {
 		return s

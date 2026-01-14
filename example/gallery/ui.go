@@ -23,7 +23,11 @@ func (g *Game) writeLog(text string) {
 }
 
 func (g *Game) testWindow(ctx *debugui.Context) {
-	ctx.Window("Demo Window", image.Rect(40, 40, 340, 500), func(layout debugui.ContainerLayout) {
+	width, height := ebiten.WindowSize()
+	x, y := width/24, height/16
+	ctx.SetStyle("funky")
+	defer ctx.SetStyle("default")
+	ctx.Window("Demo Window", image.Rect(x, y, x+300, y+480), func(layout debugui.ContainerLayout) {
 		ctx.Header("Window Info", false, func() {
 			ctx.SetGridLayout([]int{-1, -1}, nil)
 			ctx.Text("Position:")

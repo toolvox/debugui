@@ -17,7 +17,7 @@ import (
 	"fmt"
 	"image"
 
-	"github.com/ebitengine/debugui"
+	"github.com/toolvox/debugui"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 

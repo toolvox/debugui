@@ -1,4 +1,4 @@
-module github.com/ebitengine/debugui
+module github.com/toolvox/debugui
 
 go 1.24.0
 

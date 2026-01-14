@@ -93,6 +93,21 @@ func (c *Context) Window(title string, initialBounds image.Rectangle, f func(lay
 	})
 }
 
+// WindowSize creates a new window with the contents defined by the function f.
+//
+// title is the title of the window.
+// windowSize is current size and position of the window.
+func (c *Context) WindowSized(title string, windowSize image.Rectangle, f func(layout ContainerLayout)) {
+	pc := caller()
+	idPart := idPartFromCaller(pc)
+	_ = c.wrapEventHandlerAndError(func() (EventHandler, error) {
+		if err := c.window(title, windowSize, optionManualResize, idPart, f); err != nil {
+			return nil, err
+		}
+		return nil, nil
+	})
+}
+
 func (c *Context) window(title string, initialBounds image.Rectangle, opt option, idPart string, f func(layout ContainerLayout)) error {
 	// A window is not a widget in the current implementation, but a window is a widget in the concept.
 	var err error
@@ -108,7 +123,7 @@ func (c *Context) doWindow(title string, initialBounds image.Rectangle, opt opti
 	if cnt == nil || !cnt.open {
 		return nil
 	}
-	if cnt.layout.Bounds.Dx() == 0 {
+	if cnt.layout.Bounds.Dx() == 0 || (opt|optionManualResize) != 0 {
 		cnt.layout.Bounds = initialBounds
 	}
 

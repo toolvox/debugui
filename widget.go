@@ -49,6 +49,7 @@ const (
 	optionPopup
 	optionClosed
 	optionExpanded
+	optionManualResize
 )
 
 func (c *Context) pointingOver(bounds image.Rectangle) bool {

@@ -123,7 +123,7 @@ func (c *Context) doWindow(title string, initialBounds image.Rectangle, opt opti
 	if cnt == nil || !cnt.open {
 		return nil
 	}
-	if cnt.layout.Bounds.Dx() == 0 || (opt|optionManualResize) != 0 {
+	if cnt.layout.Bounds.Dx() == 0 || (opt&optionManualResize) == optionManualResize {
 		cnt.layout.Bounds = initialBounds
 	}
 

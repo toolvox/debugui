@@ -14,9 +14,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/toolvox/debugui"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/toolvox/debugui"
 )
 
 //go:embed gophers.jpg

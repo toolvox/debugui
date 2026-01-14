@@ -44,7 +44,7 @@ func (c *Context) textFieldRaw(buf *string, id widgetID, opt option) (EventHandl
 			// handle text input
 			f.Focus()
 			x := bounds.Min.X + c.style().padding + textWidth(*buf)
-			y := bounds.Min.Y + lineHeight()
+			y := bounds.Min.Y + LineHeight()
 			handled, err := f.HandleInput(x, y)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
@@ -80,7 +80,7 @@ func (c *Context) textFieldRaw(buf *string, id widgetID, opt option) (EventHandl
 
 			color := c.style().colors[colorText]
 			textw := textWidth(*buf)
-			texth := lineHeight()
+			texth := LineHeight()
 			ofx := bounds.Dx() - c.style().padding - textw - 1
 			textx := bounds.Min.X + min(ofx, c.style().padding)
 			switch {
@@ -160,7 +160,7 @@ func (c *Context) numberField(value *int, step int, idPart string, opt option) (
 	var err error
 	c.idScopeFromIDPart(idPart, func(id widgetID) {
 		c.GridCell(func(bounds image.Rectangle) {
-			c.SetGridLayout([]int{-1, lineHeight()}, nil)
+			c.SetGridLayout([]int{-1, LineHeight()}, nil)
 
 			buf := fmt.Sprintf("%d", *value)
 			e1, err1 := c.textFieldRaw(&buf, id, opt)
@@ -236,7 +236,7 @@ func (c *Context) numberFieldF(value *float64, step float64, digits int, idPart 
 	var err error
 	c.idScopeFromIDPart(idPart, func(id widgetID) {
 		c.GridCell(func(bounds image.Rectangle) {
-			c.SetGridLayout([]int{-1, lineHeight()}, nil)
+			c.SetGridLayout([]int{-1, LineHeight()}, nil)
 
 			buf := formatNumber(*value, digits)
 			e1, err1 := c.textFieldRaw(&buf, id, opt)

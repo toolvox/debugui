@@ -191,13 +191,13 @@ func (c *Context) Checkbox(state *bool, label string) EventHandler {
 			}
 			return e
 		}, func(bounds image.Rectangle) {
-			box := image.Rect(bounds.Min.X, bounds.Min.Y+(bounds.Dy()-lineHeight())/2, bounds.Min.X+lineHeight(), bounds.Max.Y-(bounds.Dy()-lineHeight())/2)
+			box := image.Rect(bounds.Min.X, bounds.Min.Y+(bounds.Dy()-LineHeight())/2, bounds.Min.X+LineHeight(), bounds.Max.Y-(bounds.Dy()-LineHeight())/2)
 			c.drawWidgetFrame(id, box, colorBase, 0)
 			if *state {
 				c.drawIcon(iconCheck, box, c.style().colors[colorText])
 			}
 			if label != "" {
-				bounds = image.Rect(bounds.Min.X+lineHeight(), bounds.Min.Y, bounds.Max.X, bounds.Max.Y)
+				bounds = image.Rect(bounds.Min.X+LineHeight(), bounds.Min.Y, bounds.Max.X, bounds.Max.Y)
 				c.drawWidgetText(label, bounds, colorText, 0)
 			}
 		})

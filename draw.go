@@ -40,7 +40,7 @@ func textWidth(str string) int {
 	return int(text.Advance(str, fontFace))
 }
 
-func lineHeight() int {
+func LineHeight() int {
 	return int(fontFace.Metrics().HAscent + fontFace.Metrics().HDescent + fontFace.Metrics().HLineGap)
 }
 
@@ -106,7 +106,7 @@ func (c *Context) draw(screen *ebiten.Image) {
 	for cmd := range c.commands() {
 		switch cmd.typ {
 		case commandRect:
-			vector.DrawFilledRect(
+			vector.FillRect(
 				target,
 				float32(cmd.rect.rect.Min.X*scale),
 				float32(cmd.rect.rect.Min.Y*scale),
@@ -163,7 +163,7 @@ func (c *Context) drawBox(rect image.Rectangle, color color.Color) {
 }
 
 func (c *Context) drawText(str string, pos image.Point, color color.Color) {
-	rect := image.Rect(pos.X, pos.Y, pos.X+textWidth(str), pos.Y+lineHeight())
+	rect := image.Rect(pos.X, pos.Y, pos.X+textWidth(str), pos.Y+LineHeight())
 	clipped := c.checkClip(rect)
 	if clipped == clipAll {
 		return
@@ -241,7 +241,7 @@ func (c *Context) drawWidgetText(str string, rect image.Rectangle, colorid int, 
 	var pos image.Point
 	tw := textWidth(str)
 	c.pushClipRect(rect)
-	pos.Y = rect.Min.Y + (rect.Dy()-lineHeight())/2
+	pos.Y = rect.Min.Y + (rect.Dy()-LineHeight())/2
 	if (opt & optionAlignCenter) != 0 {
 		pos.X = rect.Min.X + (rect.Dx()-tw)/2
 	} else if (opt & optionAlignRight) != 0 {
@@ -299,6 +299,10 @@ func (c *Context) Scale() int {
 	return c.scaleMinus1 + 1
 }
 
-func (c *Context) style() *style {
-	return &defaultStyle
+func (c *Context) style() *Style {
+	result, ok := Styles[c.styleKey]
+	if !ok {
+		result = Styles[c.styleKey]
+	}
+	return result
 }

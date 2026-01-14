@@ -23,7 +23,9 @@ func (g *Game) writeLog(text string) {
 }
 
 func (g *Game) testWindow(ctx *debugui.Context) {
-	ctx.Window("Demo Window", image.Rect(40, 40, 340, 500), func(layout debugui.ContainerLayout) {
+	width, height := ebiten.WindowSize()
+	x, y := width/24, height/16
+	ctx.Window("Demo Window", image.Rect(x, y, x+300, y+480), func(layout debugui.ContainerLayout) {
 		ctx.Header("Window Info", false, func() {
 			ctx.SetGridLayout([]int{-1, -1}, nil)
 			ctx.Text("Position:")
@@ -181,7 +183,9 @@ The Go Gopher by Renee French is licensed under the Creative Commons Attribution
 }
 
 func (g *Game) logWindow(ctx *debugui.Context) {
-	ctx.Window("Log Window", image.Rect(350, 40, 650, 290), func(layout debugui.ContainerLayout) {
+	width, height := ebiten.WindowSize()
+	x, y := width/2, height/16
+	ctx.Window("Log Window", image.Rect(x, y, x+300, y+250), func(layout debugui.ContainerLayout) {
 		ctx.SetGridLayout([]int{-1}, []int{-1, 0})
 		ctx.Panel(func(layout debugui.ContainerLayout) {
 			ctx.SetGridLayout([]int{-1}, []int{-1})
@@ -214,7 +218,9 @@ func (g *Game) logWindow(ctx *debugui.Context) {
 }
 
 func (g *Game) buttonWindows(ctx *debugui.Context) {
-	ctx.Window("Button Windows", image.Rect(350, 300, 650, 500), func(layout debugui.ContainerLayout) {
+	width, height := ebiten.WindowSize()
+	x, y := width/2, height/2
+	ctx.WindowSized("Button Windows", image.Rect(x, y, x+300, y+200), func(layout debugui.ContainerLayout) {
 		ctx.SetGridLayout([]int{-1, -1, -1, -1}, nil)
 		ctx.Loop(100, func(i int) {
 			ctx.Button("Button").On(func() {

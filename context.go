@@ -54,6 +54,8 @@ type Context struct {
 	screenWidth  int
 	screenHeight int
 
+	styleKey string
+
 	err error
 }
 

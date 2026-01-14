@@ -155,6 +155,27 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
+
+	debugui.NewStyle("funky", 60, 18, 5, 4, debugui.LineHeight(), 24, 12, 8,
+		[...]color.RGBA{
+			{255, 248, 220, 255}, // warm cream
+			{138, 43, 226, 255},  // blue-violet
+			{30, 20, 50, 230},    // deep purple
+			{255, 95, 31, 255},   // vibrant orange
+			{255, 95, 31, 180},
+			{20, 20, 35, 255}, // near-black
+			{0, 0, 0, 0},
+			{0, 191, 165, 255}, // teal
+			{0, 220, 190, 255}, // lighter teal
+			{255, 215, 0, 255}, // gold pop
+			{45, 25, 70, 255},  // muted purple
+			{60, 35, 90, 255},
+			{75, 45, 110, 255},
+			{50, 30, 75, 255},
+			{255, 105, 80, 255}, // coral
+		},
+	)
+
 	if err := ebiten.RunGame(g); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

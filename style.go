@@ -7,7 +7,7 @@ import (
 	"image/color"
 )
 
-type style struct {
+type Style struct {
 	defaultWidth  int
 	defaultHeight int
 	padding       int
@@ -17,6 +17,25 @@ type style struct {
 	scrollbarSize int
 	thumbSize     int
 	colors        [colorCount]color.RGBA
+}
+
+func NewStyle(
+	name string,
+	defaultWidth int, defaultHeight int,
+	padding int, spacing int,
+	indent int, titleHeight int,
+	scrollbarSize int, thumbSize int,
+	colors [colorCount]color.RGBA,
+) *Style {
+	result := &Style{
+		defaultWidth: defaultWidth, defaultHeight: defaultHeight,
+		padding: padding, spacing: spacing,
+		indent: indent, titleHeight: titleHeight,
+		scrollbarSize: scrollbarSize, thumbSize: thumbSize,
+		colors: colors,
+	}
+	Styles[name] = result
+	return result
 }
 
 const (
@@ -38,12 +57,17 @@ const (
 	colorCount
 )
 
-var defaultStyle style = style{
+var Styles = map[string]*Style{
+	"":        &defaultStyle,
+	"default": &defaultStyle,
+}
+
+var defaultStyle Style = Style{
 	defaultWidth:  60,
 	defaultHeight: 18,
 	padding:       5,
 	spacing:       4,
-	indent:        lineHeight(),
+	indent:        LineHeight(),
 	titleHeight:   24,
 	scrollbarSize: 12,
 	thumbSize:     8,
@@ -64,4 +88,8 @@ var defaultStyle style = style{
 		colorScrollBase:         {43, 43, 43, 255},
 		colorScrollThumb:        {30, 30, 30, 255},
 	},
+}
+
+func (c *Context) SetStyle(styleKey string) {
+	c.styleKey = styleKey
 }
